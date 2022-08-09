@@ -4,6 +4,10 @@
 format: jb-book
 root: intro
 chapters:
-- file: problem
-- file: derivation
-- file: implementation
+- file: chapters/problem
+- file: chapters/derivation
+- file: chapters/implementation
+  sections:
+    - file: chapters/implementation/physics_module
+    - file: chapters/implementation/plotting_module
+    - file: chapters/implementation/main_script
