@@ -11,3 +11,4 @@ chapters:
     - file: chapters/implementation/physics_module
     - file: chapters/implementation/plotting_module
     - file: chapters/implementation/main_script
+- file: chapters/references
