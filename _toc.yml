@@ -5,7 +5,7 @@ format: jb-book
 root: intro
 chapters:
 - file: chapters/problem
-- file: chapters/derivation
+- file: chapters/maths_modelling
 - file: chapters/implementation
   sections:
     - file: chapters/implementation/physics_module
