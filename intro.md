@@ -7,6 +7,14 @@ In this document, water transport in porous media is being discussed by numerica
 one dimensional initial and boundary value problem.
 The modeling is done according to {cite}`A7` and validated by comparing with {cite}`A4`.
 
+## Problem Description
+A specimen of a certain length and cross sectional area is exposed to moisture levels at both ends. 
+Over time, certain moisture levels will manifest inside the specimen depending on:
+* initial condition
+* boundary conditions
+* material properties
+
+This allows to simulate experiments like imbibition and drying. 
 
 ## Table of Contents
 ```{tableofcontents}

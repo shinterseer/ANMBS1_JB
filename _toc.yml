@@ -4,11 +4,10 @@
 format: jb-book
 root: intro
 chapters:
-- file: chapters/problem
 - file: chapters/maths_modelling
 - file: chapters/implementation
-  sections:
-    - file: chapters/implementation/physics_module
-    - file: chapters/implementation/plotting_module
-    - file: chapters/implementation/main_script
+- file: chapters/results
+- file: chapters/benchmarks
+- file: chapters/physics
 - file: chapters/references
+

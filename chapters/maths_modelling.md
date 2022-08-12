@@ -143,7 +143,47 @@ integrators (Euler, Runge-Kutta, ...) as long as we can evaluate the right-hand 
 ## Evaluating the right-hand side
 It is necessary to evaluate $\delta_p (w), K(w), P_{suc} (w)$ and $p_v (w)$
 
+### Diffusion coefficient $\delta_p$ and vapor pressure $p_v$
 We assume the diffusion coefficient $\delta$ to be a material constant, that is independent from moisture.
+
+Vapor pressure $p_v$ will be calculated according to this formula:
+
+$$
+p_v(w) = p_{sat}(T)\cdot exp\left(-\frac {P_{suc}(w)} {\rho_{water}R_{H2O}T}\right)
+$$
+
+with the material constants $\rho_{water}$, $R_{vapor}$ and an 
+appropriate assumption of the absolute temperature $T$.
+
+For the calculation of $P_{suc}(w)$ see the [section below](fluid_conductivity_header).
+For the calculation of $p_{sat}$ the empirical Magnus-equation is used:
+
+$$
+p_{sat}(T) = 0.6109 \cdot exp\left(\frac{17.625 T}{T + 243.04}\right)
+$$
+
+:::{note}
+The formula for $p_v(w)$ can be derived from a special case of the Kelvin equation also known as the 
+Oswald-Freundlich equation:
+
+$$
+log{\frac{p_v}{p_{sat}}=\frac{2\gamma \cdot V_m}{rRT}}
+$$
+
+with the molar volume of the liquid $V_m$, the pore radius $r$ and the universal gas constant $R$ 
+(note, that $V_m/R=1/(\rho_{water}R_{H2O}$)
+by making use of the Young-Laplace equation ("capillary equation"):
+
+$$
+-P_{suc} = p_c = \frac{2\gamma}{r} cos{\theta}
+$$
+
+with surface tension $\gamma$, capillary radius $r$ and contact angle $\theta$ 
+which is assumed to be $90°$ here for simplicity's sake.
+:::
+
+(fluid_conductivity_header)=
+### Fluid water conductivity $K(w)$ and suction pressure $P_{suc}$
 Fluid water conductivity $K(w)$ can be calculated accoding to {cite}`A7`:
 
 $$
@@ -172,4 +212,4 @@ K(w) = \frac{w \cdot r_p}{(1-r_pP_{suc}(w))^2} \frac{n+1}{2n}
 \left(n+1-\left(\frac{w}{w_{cap}}\right)^n\right)
 $$
 
-Here, $n$, $r_p$, $w_{cap}$ and $A$ are material constants.
+With the matierial constants $n$, $r_p$, $w_{cap}$ and $A$.
