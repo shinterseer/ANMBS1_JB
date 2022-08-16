@@ -4,7 +4,7 @@ def p_Sat_calc(temp):
     '''
     Magnus formula to calculate the saturation vapourpressure based on the temperature.
     :param temp: Temperature in °C
-    :return: p_Sat (in Pa?????)
+    :return: p_Sat in Pa
     '''
     return 0.61094 * np.exp((17.625 * temp) / (temp + 243.04)) * 1000
 
@@ -15,7 +15,6 @@ def phi_kelvin_calc(p_suc):
     :param p_suc: (in Pa?????)
     :return: relative humidity (dimensionless)
     '''
-
     rho_w = 1000  # kg/m3
     Rv = 462  # J/ (kgK) Spezifische Gaskonstante für Wasserdampf
     T_ref = 293.15  # K
@@ -37,22 +36,6 @@ def p_suc_kelvin_calc(rh):
     p_suc = - rho_w * Rv * T_ref * np.log(rh)
     return p_suc
 
-
-# def K_conduct_calc(K):
-#     K_cond = np.zeros(K.size - 1)
-#     for count, value in enumerate(K_cond):
-#         K_cond[count] = (K[count] + K[count + 1]) / 2
-#     return K_cond
-
-# def mu_phi(phi, mu_max):
-#     '''
-#     Linear approximation of mu to calculate mu dependant on the relative humidity.
-#     :param phi: Relative humidity in cell at given moment
-#     :param mu_max: Maximal mu for phi = 0
-#     :return:
-#     '''
-#
-#     return mu_max - phi * mu_max
 
 def avg_conductivity_harmonic(c1, c2):
     return 2 * c1 * c2 / (c1 + c2)
@@ -102,10 +85,6 @@ def get_material(mat_string):
 
 
 class one_d_problem:
-    # %%
-    # --------------------- #
-    #       INPUTS          #
-    # --------------------- #
 
     def __init__(self, res, sim_time, material, length, init_w=0, w_west=1, w_east=0):
         '''
@@ -114,8 +93,8 @@ class one_d_problem:
         material ... string; must match an entry in get_material()
         length ... length of the specimen in meters
         init_w ... initial value: initial water content 0: dry, 1: freely saturated
-        w_left ... boundary condition: water content of left border 0: dry, 1: freely saturated
-        w_right ... boundary condition: water content of right border 0: dry, 1: freely saturated
+        w_west ... boundary condition: water content of left border 0: dry, 1: freely saturated
+        w_east ... boundary condition: water content of right border 0: dry, 1: freely saturated
         '''
 
         # Simulation Parameters
@@ -163,9 +142,6 @@ class one_d_problem:
         self.w[0] = max(w_west * self.free_saturation, self.w_zero)
         self.w[-1] = max(w_east * self.free_saturation, self.w_zero)
 
-        #self.beta_left = 0  # Feuchteübergangskoeffizient in kg/m²hPa
-        #self.beta_right = 0.635  # Feuchteübergangskoeffizient in kg/m²hPa
-
 
     def w_calc(self, P_suc):
         '''
@@ -197,8 +173,8 @@ class one_d_problem:
         return P_suc
 
 
-    # Function to solve
-    # -------------------
+    # Function to solve - this is w_dot = f(t, w)
+    # ----------------------------------------------
     def dwdt_calc(self, t, w):
         # Numerical approximation to avoid divsion by zero
         w[w == 0] = self.w_zero

@@ -1,4 +1,4 @@
-# ANMBS1 - Fluid Water Transport in Porous Media
+# Fluid Water Transport in Porous Media
 
 This Jupyter Book was created for the course Advanced Numerical Methods in 
 Building Science 1 (207.014) at TU Wien during Summer 2022.
@@ -14,10 +14,5 @@ Over time, certain moisture levels will manifest inside the specimen depending o
 * boundary conditions
 * material properties
 
-This allows to simulate experiments like imbibition and drying. 
-
-## Table of Contents
-```{tableofcontents}
-```
-
+This allows to simulate experiments like imbibition and drying of a specimen of a certain material. 
 

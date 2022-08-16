@@ -1,3 +1,4 @@
+(modelling-header)=
 # Mathematical modelling
 
 The mathematical modelling of the problem will follow {cite}`A7`.
@@ -17,11 +18,10 @@ $$
 and
 
 $$
-g_{v} = K_{w} \frac{\partial P_{suc}} {\partial x}
+g_{l} = K_{w} \frac{\partial P_{suc}} {\partial x}
 $$
 
-with $P_{suc}$ denoting the suction pressure
-With $w$ in $kg/m^3$ to denote the total moisture content we get the governing equation of the problem:
+with $P_{suc}$ denoting the suction pressure and $w$ in $kg/m^3$ to denote the total moisture content, we get the governing equation of the problem:
 
 $$
 \frac {\partial w}{\partial t} = \dot w =  - \frac {\partial g_{v}}{\partial x}  - \frac {\partial g_{l}}{\partial x}
@@ -34,7 +34,7 @@ With decreasing cell size, this approach gives convergence.
 The discretization scheme is depicted in {numref}`Figure {number} <discretization-fig>`.
 
 
-```{figure} ./discretization.jpg
+```{figure} ./img/discretization.jpg
 ---
 name: discretization-fig
 width: 500px
@@ -68,7 +68,7 @@ Here, the indices $w$ and $e$ mean "at the cross-section border between the cell
 
 $$
 \begin{eqnarray}
-\dot w &=& -\frac{\partial g}{\partial x} = \frac{\partial g_{v}}{\partial x} - \frac{\partial g_{l}}{\partial x}\\
+\dot w &=& -\frac{\partial g}{\partial x} = -\frac{\partial g_{v}}{\partial x} - \frac{\partial g_{l}}{\partial x}\\
 &\approx& -\frac{g_{v,e} - g_{v,w}}{d_{we}} -\frac{g_{l,e} - g_{l,w}}{d_{we}} \\
 &=& - \frac{1}{d_{we}}(g_{v,e} - g_{v,w} + g_{l,e} - g_{l,w}) \\
 &=& - \frac{1}{d_{we}} \left( -\delta_{e} \frac{\partial p_{v,e}}{\partial x}
@@ -78,10 +78,10 @@ $$
 \end{eqnarray}
 $$
 
-Here the second spatial derivative occurs. It will be approximated as a one-sided derivative e.g.:
+Here the other spatial derivative occurs. It will be approximated as a one-sided derivative e.g.:
 
 $$
-\frac {\partial g}{\partial x} \approx \frac{g_{e} - g_{w}}{d_{we}}
+\frac {\partial g_{v,e}}{\partial x} \approx \frac{g_{v,E} - g_{v,P}}{d_{PE}}
 $$
 
 This leads to
@@ -119,7 +119,7 @@ $$
 \left( \frac {\delta_w}{d}  + \frac {\delta_e} {d} \right) p_{v,P} 
 - \frac {\delta_w} {d} p_{v,W}
 - \frac {\delta_e} {d} p_{v,E}
-- \left(\frac {K_w} {d} + \frac {K_e} {d_{PE}} \right) P_{suc,P} 
+- \left(\frac {K_w} {d} + \frac {K_e} {d} \right) P_{suc,P} 
 + \frac {K_w} {d} P_{suc,W}
 + \frac {K_e} {d} P_{suc,E}
 \right) \\
@@ -152,7 +152,7 @@ $$
 p_v(w) = p_{sat}(T)\cdot exp\left(-\frac {P_{suc}(w)} {\rho_{water}R_{H2O}T}\right)
 $$
 
-with the material constants $\rho_{water}$, $R_{vapor}$ and an 
+with the material constants $\rho_{water}$, $R_{H2O}$ and an 
 appropriate assumption of the absolute temperature $T$.
 
 For the calculation of $P_{suc}(w)$ see the [section below](fluid_conductivity_header).
@@ -178,8 +178,8 @@ $$
 -P_{suc} = p_c = \frac{2\gamma}{r} cos{\theta}
 $$
 
-with surface tension $\gamma$, capillary radius $r$ and contact angle $\theta$ 
-which is assumed to be $90°$ here for simplicity's sake.
+with surface tension $\gamma$, capillary radius $r$ and contact angle $\theta$. 
+The contact angle term $cos \,\theta$ is assumed to be 1 here for simplicity's sake.
 :::
 
 (fluid_conductivity_header)=

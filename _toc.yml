@@ -8,6 +8,4 @@ chapters:
 - file: chapters/implementation
 - file: chapters/results
 - file: chapters/benchmarks
-- file: chapters/physics
 - file: chapters/references
-
