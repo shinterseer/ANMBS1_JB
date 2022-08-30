@@ -156,10 +156,10 @@ with the material constants $\rho_{water}$, $R_{H2O}$ and an
 appropriate assumption of the absolute temperature $T$.
 
 For the calculation of $P_{suc}(w)$ see the [section below](fluid_conductivity_header).
-For the calculation of $p_{sat}$ the empirical Magnus-equation is used:
+For the calculation of $p_{sat}$ the empirical Magnus-equation is used (here $T$ is in $°C\,$):
 
 $$
-p_{sat}(T) = 0.6109 \cdot exp\left(\frac{17.625 T}{T + 243.04}\right)
+p_{sat}(T) = 611.2\,Pa \cdot exp\left(\frac{17.625 \cdot T}{T + 243.04}\right)
 $$
 
 :::{note}
